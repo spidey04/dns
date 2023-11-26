@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<sys/socket.h>
+#include<errno.h>
+#include<netdb.h>
+#include<arpa/inet.h>
+int main(int argc,char*argv[1])
+{
+struct hostent*hen;
+if(argc!=2)
+{
+fprintf(stderr,"Enter host name");
+}
+hen=gethostbyname(argv[1]);
+if(hen==NULL)
+{
+fprintf(stderr,"Host not found");
+}
+printf("Host name : %s \n",hen->h_name);
+printf("IP address : %s \n",inet_ntoa(*((struct in_addr *)hen->h_name)));
+}
